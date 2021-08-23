@@ -1,0 +1,171 @@
+1. create a SP which accepts deptno and display
+all emp details who belong to that deptno
+
+2. create a SP which accepts empno and display
+his/her annual sal
+
+3. create a SP which accepts deptno and display
+how many employees working in that deptno
+
+4. create a SP which accepts deptno and display
+what is the min and max sal taken in that deptno
+
+
+create procedure Getemp(@deptno int)
+as 
+begin
+select * from emp where deptno= @deptno
+end
+
+exec Getemp 10
+
+select * from dept
+
+create procedure AddDept(@deptno int,@dname varchar(30),@loc varchar(30))
+as 
+begin
+insert into dept values (@deptno,@dname,@loc)
+end
+
+exec AddDept 50,london,england
+
+create procedure DropDept(@deptno int)
+as 
+begin
+
+delete from dept where deptno = @deptno
+end
+
+exec DropDept 50
+
+
+create procedure GetEmpSalary(@empno int)
+as 
+begin
+select ename , sal from emp where empno = @empno
+end
+
+exec GetEmpSalary 7369
+
+select * from emp
+
+create procedure GetEmpCount(@deptno int)
+as 
+begin
+select Count(empno) from emp where deptno = @deptno
+end
+
+exec GetEmpCount 20
+
+
+create procedure GetMinMax(@deptno int)
+as 
+begin
+select min(sal) Minimum , max(sal)Maximun from emp where deptno = @deptno
+end
+
+exec GetMinMax 10
+
+
+1. create function which accepts empno and return
+his/her annual sal
+
+2. create a function which accepts deptno
+and returns no of employee available
+in that deptno
+
+1. Create a function which accepts mgrid and display
+all emps who report to that person
+
+2. Create a function which accepts num as a salary
+and display all emps who get sal more than given sal
+
+create function GetEmpSalyear(@empno int)
+returns table
+as
+return (select sal*12 as sal from emp where empno=@empno)
+
+
+
+select * from GetEmpSalyear(7698)
+
+create function GetEmployeeMgrid(@mgrid int)
+returns table
+as
+return
+(select empno,ename,mgr
+from emp
+where mgr=@mgrid)
+
+select * from GetEmployeeMgrid(7698)
+
+create function GetGreaterSalary(@sal int)
+returns table
+as
+return
+(select ename
+from emp
+where sal > @sal)
+
+select * from GetGreaterSalary(1000)
+
+
+
+STRING , NUMERICS AND DATE TIME
+select ascii('ename')
+
+SELECT CHAR(65)
+
+SELECT CONCAT('Advaith', ' Ashwin');
+
+SELECT LEFT('SQL Transact', 5);
+
+select len('example')
+
+select lower('RANDOM')
+
+SELECT LTRIM('     Structured')
+
+SELECT REPLACE('training', 'T', ' ')
+
+SELECT REPLICATE('Transact', 7);
+
+SELECT reverse('Deccan')
+
+SELECT RIGHT('SQL Transact', 5);
+
+SELECT RTRIM('Structured      ')
+
+SELECT SUBSTRING('SQL Transact', 1, 3)
+
+select upper('training')
+
+SELECT TRIM('     SQL     ')
+
+Select CEILING(22.4)
+
+
+select FLOOR(22.4)
+
+select Rand(4)
+
+select ROUND(2.4354,2)
+
+SELECT sqrt(1225)
+
+DATE AND DATETIME:-
+
+DECLARE @date date= '12-10-25';  
+DECLARE @datetime datetime= @date;  
+  
+SELECT @date AS '@date', @datetime AS '@datetime';
+
+DECLARE @date date = '1912-10-25';  
+DECLARE @datetimeoffset datetimeoffset(3) = @date;  
+  
+SELECT @date AS '@date', @datetimeoffset AS '@datetimeoffset'; 
+
+DECLARE @date date = '1912-10-25'  
+DECLARE @datetime2 datetime2(3) = @date;  
+  
+SELECT @date AS '@date', @datetime2 AS '@datetime2(3)';
